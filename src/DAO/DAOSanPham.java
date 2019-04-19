@@ -143,17 +143,25 @@ public class DAOSanPham {
         }
        return rs;
     }
-    public static void main(String[] args) {
+    public ResultSet displayPrice(String tensp)  {
+        String sql = "select GiaBan from tbl_SanPham where TenSanPham = '" + tensp + "'";
+        ResultSet rs = null;
+        try {
+            Statement statement = conn.createStatement();
+            rs = statement.executeQuery(sql);
+        } catch (SQLException ex)  {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE,null,ex);
+        }
+       return rs;
+    }
+    public static void main(String[] args) throws SQLException {
         CFConnection conn = new CFConnection();
         DAOSanPham daosp = new DAOSanPham(conn);
-        SanPham sp = new SanPham("SP01","computrino","L01",570000.0);
+        //SanPham sp = new SanPham("SP01","computrino","L01",570000.0);
         //System.out.println(daosp.insertSanPham(sp));
-       try {
-           while(daosp.display().next())   {
-               System.out.println(daosp.display().getString("TenSanPham"));
-           }
-       } catch (SQLException ex) {
-           Logger.getLogger(DAOSanPham.class.getName()).log(Level.SEVERE, null, ex);
+       ResultSet rs  = daosp.displayPrice("computrino");
+       while(rs.next()) {
+           System.out.println(rs.getString("GiaBan"));
        }
     }
 }
