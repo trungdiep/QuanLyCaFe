@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,7 +31,7 @@ public class DBConnection {
     }
 
     public DBConnection() throws SQLException {
-        this("jdbc:sqlserver://Localhost:1433;databaseName=QuanLyQuanCafe", "sa", "123456");
+        this("jdbc:sqlserver://localhost:1433;databaseName=QuanLyQuanCafe", "sa", "123456");
     }
     
     public static void main(String[] args) throws SQLException {
