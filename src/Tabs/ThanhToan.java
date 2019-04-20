@@ -28,6 +28,7 @@ public class ThanhToan extends javax.swing.JPanel {
     public ThanhToan() throws SQLException {
         initComponents();
         hienthi();
+        
     }
 
     /**
@@ -43,7 +44,7 @@ public class ThanhToan extends javax.swing.JPanel {
         cboKH = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         txtmaHD = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        addSanPham = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtSL = new javax.swing.JTextField();
@@ -51,7 +52,8 @@ public class ThanhToan extends javax.swing.JPanel {
         txtThanhTien = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        table1 = new javax.swing.JTable();
+        removeSP = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Ten KH:");
@@ -63,11 +65,11 @@ public class ThanhToan extends javax.swing.JPanel {
 
         txtmaHD.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setText("+");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addSanPham.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        addSanPham.setText("+");
+        addSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addSanPhamActionPerformed(evt);
             }
         });
 
@@ -86,7 +88,7 @@ public class ThanhToan extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel7.setText("Thành tiền :");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -94,8 +96,16 @@ public class ThanhToan extends javax.swing.JPanel {
                 "STT", "San Pham", "SL", "Gia"
             }
         ));
-        jTable2.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
-        jScrollPane2.setViewportView(jTable2);
+        table1.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        jScrollPane2.setViewportView(table1);
+
+        removeSP.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        removeSP.setText("-");
+        removeSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,17 +131,18 @@ public class ThanhToan extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboSP, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeSP, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(154, 154, 154))
             .addGroup(layout.createSequentialGroup()
-                .addGap(345, 345, 345)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -145,8 +156,10 @@ public class ThanhToan extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(56, 56, 56))
+                        .addComponent(addSanPham)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeSP)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -167,13 +180,12 @@ public class ThanhToan extends javax.swing.JPanel {
                                     .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))))
                         .addGap(13, 13, 13)))
-                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(491, 491, 491)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73))
+                .addGap(482, 482, 482))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel6});
@@ -181,28 +193,45 @@ public class ThanhToan extends javax.swing.JPanel {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboKH, cboSP, txtSL, txtmaHD});
 
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    DefaultTableModel model = new DefaultTableModel(); ; 
+    private void addSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSanPhamActionPerformed
        
             // TODO add your handling code here:
+        String [] row = addRow();
+        String [] colsName  = {"STT","San Pham","SL","Gia"};
+        model.setColumnIdentifiers(colsName);
+        model.addRow(row);
+        table1.setModel(model);
+        txtThanhTien.setText(TongTien().toString());
+    }//GEN-LAST:event_addSanPhamActionPerformed
+
+    private void removeSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSPActionPerformed
+        // TODO add your handling code here:
+        int index = table1.getSelectedRow();
+        table1.remove(index);
+    }//GEN-LAST:event_removeSPActionPerformed
+    private  String[] addRow()  {
         CFConnection conn = new CFConnection();
         DAO.DAOSanPham dsp = new DAOSanPham(conn);
         int sl = Integer.parseInt(txtSL.getText());
-        System.out.println(sl);
+        Double prices = 0.0;
         ResultSet rs = dsp.displayPrice(cboSP.getSelectedItem().toString());
-        try {
-            while (rs.next()) {
+        try{
+            if (rs.next()) {
                 String pricesql = rs.getString("GiaBan");
-                Double prices = sl * Double.valueOf(pricesql);
-                System.out.println(prices);
+                prices = sl * Double.valueOf(pricesql);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+        String [] row = new String[4];
+        int i = 0;
+        row[0] = String.valueOf(++i);
+        row[1] = cboSP.getSelectedItem().toString();
+        row[2] = txtSL.getText();
+        row[3] = prices.toString();
+        return row;
+    }
     public void hienthi() throws SQLException   {
         CFConnection conn = new CFConnection();
         DAO.DAOKhachHang dkh = new DAOKhachHang(conn);
@@ -221,18 +250,25 @@ public class ThanhToan extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel();
         
     }
-
+    public Double TongTien()
+    {
+        Double totalmoney = 0.0;
+            for(int j =0;j<model.getRowCount();j++) 
+                totalmoney+= Double.valueOf(model.getValueAt(j,3).toString());            
+        return totalmoney;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addSanPham;
     private javax.swing.JComboBox<String> cboKH;
     private javax.swing.JComboBox<String> cboSP;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JButton removeSP;
+    private javax.swing.JTable table1;
     private javax.swing.JTextField txtSL;
     private javax.swing.JTextField txtThanhTien;
     private javax.swing.JTextField txtmaHD;

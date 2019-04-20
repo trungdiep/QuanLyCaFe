@@ -14,8 +14,36 @@ public class HDB {
     private String ngayban;
     private String manv;
     private String makh;
-    private String tongtien;
+    private Double tongtien;
 
+    public HDB(String mahdb, String manv, String makh, Double tongtien) {
+        this.mahdb = mahdb;
+        this.manv = manv;
+        this.makh = makh;
+        this.tongtien = tongtien;
+    }
+
+    public String getMahdb() {
+        return mahdb;
+    }
+
+    public String getNgayban() {
+        return ngayban;
+    }
+
+    public String getManv() {
+        return manv;
+    }
+
+    public String getMakh() {
+        return makh;
+    }
+
+    public Double getTongtien() {
+        return tongtien;
+    }
+
+    
     public void setMahdb(String mahdb) throws Exception {
         this.mahdb = mahdb;
         if(this.mahdb == "")
@@ -38,7 +66,7 @@ public class HDB {
             throw new Exception("ko de ma hoa don trong");
     }
 
-    public void setTongtien(String tongtien) {
+    public void setTongtien(Double tongtien) {
         this.tongtien = tongtien;
     }
     
