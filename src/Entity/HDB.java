@@ -11,7 +11,6 @@ package Entity;
  */
 public class HDB {
     private String mahdb;
-    private String ngayban;
     private String manv;
     private String makh;
     private Double tongtien;
@@ -27,9 +26,7 @@ public class HDB {
         return mahdb;
     }
 
-    public String getNgayban() {
-        return ngayban;
-    }
+
 
     public String getManv() {
         return manv;
@@ -50,9 +47,7 @@ public class HDB {
             throw new Exception("ko de ma hoa don trong");
     }
 
-    public void setNgayban(String ngayban) {
-        this.ngayban = ngayban;
-    }
+
 
     public void setManv(String manv) throws Exception {
         this.manv = manv;

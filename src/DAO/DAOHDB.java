@@ -29,6 +29,10 @@ public class DAOHDB {
     
     public int addHDB(HDB hd)  {
         int n = 0;
+        //String sql1 = "insert into tbl_HoaDonBan (MaHoaDonBan,MaNhanVien,MaKhachHang,TongTien) values('"+hd.getMahdb()+"','"+hd.getManv()+"','"+hd.getMakh()+"',"+hd.getTongtien()+");";
+        
+        
+        
         String sql = "insert into tbl_HoaDonBan (MaHoaDonBan,MaNhanVien,MaKhachHang,TongTien) values(?,?,?,?)";
         PreparedStatement pre;
         
@@ -36,8 +40,9 @@ public class DAOHDB {
             pre = conn.prepareStatement(sql);
             pre.setString(1,hd.getMahdb());
             pre.setString(2,hd.getManv());
-            pre.setDouble(4,hd.getTongtien());
             pre.setString(3,hd.getMakh());
+            pre.setDouble(4,hd.getTongtien());
+            n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAOHDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,9 +81,9 @@ public class DAOHDB {
     public static void main(String[] args) {
         CFConnection conn = new CFConnection();
         DAOHDB dhd = new DAOHDB(conn);
-        DAOCTHDB ct = new DAOCTHDB(conn);
-        if(dhd.removeHDB("HD01") == 1)
-            System.out.println(ct.removeCTHDB("HD01"));
+        DAOHDB ct = new DAOHDB(conn);
+            HDB hd = new HDB("HD01","NV01","KH01",57000.0);
+        System.out.println(ct.addHDB(hd));
     }
         
     

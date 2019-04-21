@@ -7,6 +7,7 @@ package DAO;
 
 import Connection.CFConnection;
 import Entity.CTHDB;
+import Entity.HDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -79,5 +80,9 @@ public class DAOCTHDB {
         CTHDB ct = new  CTHDB("HD01","SP01", "computrino",1,77000.0);
         System.out.println(dct.updateCTHDB(ct));
         //System.out.println(dct.removeCTHDB("HD01"));
+    }
+
+    boolean addCTDHB(HDB hd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

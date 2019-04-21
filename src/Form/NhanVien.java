@@ -20,10 +20,14 @@ public class NhanVien extends javax.swing.JFrame {
     /**
      * Creates new form NhanVien
      */
-    public NhanVien() throws SQLException {
+    public NhanVien(String employeecode) throws SQLException {
         initComponents();
-        tbdNhanVien.addTab("Thanh toan", new ThanhToan());
+        tbdNhanVien.addTab("Thanh toan", new ThanhToan(employeecode));
         tbdNhanVien.addTab("Khach hang", new KH());
+    }
+
+    private NhanVien() {
+        initComponents();
     }
 
     /**
@@ -83,11 +87,7 @@ public class NhanVien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new NhanVien().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new NhanVien().setVisible(true);
             }
         });
     }
