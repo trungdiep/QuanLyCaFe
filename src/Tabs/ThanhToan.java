@@ -13,6 +13,7 @@ import DAO.DAOSanPham;
 import DAO.DAOUser;
 import Entity.HDB;
 import Form.FromLogin;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -82,6 +83,7 @@ public class ThanhToan extends javax.swing.JPanel {
         txtmaHD = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtmaNhanVien = new javax.swing.JTextField();
+        show_validation_here = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Ten KH:");
@@ -106,6 +108,11 @@ public class ThanhToan extends javax.swing.JPanel {
         jLabel4.setText("So Luong");
 
         txtSL.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSLKeyTyped(evt);
+            }
+        });
 
         cboSP.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
@@ -157,12 +164,15 @@ public class ThanhToan extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Ma NhanVien :");
 
+        txtmaNhanVien.setEditable(false);
         txtmaNhanVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         txtmaNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmaNhanVienActionPerformed(evt);
             }
         });
+
+        show_validation_here.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -202,7 +212,8 @@ public class ThanhToan extends javax.swing.JPanel {
                                         .addGap(53, 53, 53)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtmaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtmaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(txtmaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(show_validation_here, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -249,7 +260,9 @@ public class ThanhToan extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(show_validation_here)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -319,7 +332,7 @@ public class ThanhToan extends javax.swing.JPanel {
         DAOKhachHang dkh = new DAOKhachHang(conn);
         DAOHDB hdb = new DAOHDB(conn);
         Double totalmoney = Double.valueOf(txtThanhTien.getText());
-        String makh = dkh.displayAll(cboKH.getSelectedItem().toString());
+        String makh = dkh.displayMaKhacHang(cboKH.getSelectedItem().toString());
         System.out.println(totalmoney + " - " + txtmaNhanVien.getText() + " - " +makh+ " - " + txtmaHD.getText());
         HDB hd = new HDB(txtmaHD.getText(),txtmaNhanVien.getText(),makh,totalmoney);
         if(hdb.addHDB(hd) == 1) {
@@ -339,6 +352,14 @@ public class ThanhToan extends javax.swing.JPanel {
     private void txtmaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmaNhanVienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmaNhanVienActionPerformed
+
+    private void txtSLKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSLKeyTyped
+        // TODO add your handling code here:
+        char  c = evt.getKeyChar();
+        if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE) ))  {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSLKeyTyped
     private  Vector addRow()  {
         CFConnection conn = new CFConnection();
         DAO.DAOSanPham dsp = new DAOSanPham(conn);
@@ -407,6 +428,7 @@ public class ThanhToan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton removeSP;
+    private javax.swing.JLabel show_validation_here;
     private javax.swing.JTable table1;
     private javax.swing.JTextField txtSL;
     private javax.swing.JTextField txtThanhTien;
