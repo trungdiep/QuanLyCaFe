@@ -5,17 +5,41 @@
  */
 package Tabs;
 
+import DAO.DAOLoai;
+import Entity.Loai;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author ADMIN
  */
 public class QuanLyLoai extends javax.swing.JPanel {
-
+    
+    DAOLoai dAOLoai = new DAOLoai();
+    
     /**
      * Creates new form QuanLyLoai
      */
     public QuanLyLoai() {
         initComponents();
+        showTable();
+    }
+    
+    private void showTable() {
+        System.out.println("start gets");
+        ArrayList<Loai> list = dAOLoai.displayAll();
+        
+        DefaultTableModel tabbleLoai = (DefaultTableModel) jTableQuanLyLoaiSanPham.getModel();
+        tabbleLoai.setRowCount(0);
+        
+        for(Loai loai: list){
+            tabbleLoai.addRow(new Object[]{
+                loai.getMaloai(), loai.getTenloai()
+            });
+        }
     }
 
     /**
@@ -27,6 +51,7 @@ public class QuanLyLoai extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
         jButtonTimKiem = new javax.swing.JButton();
         jButtonXoa = new javax.swing.JButton();
         jButtonSua = new javax.swing.JButton();
@@ -39,14 +64,40 @@ public class QuanLyLoai extends javax.swing.JPanel {
         jTextFieldMaLoai = new javax.swing.JTextField();
         jButtonThem = new javax.swing.JButton();
 
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         jButtonTimKiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonTimKiem.setText("Tìm kiếm");
+        jButtonTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTimKiemActionPerformed(evt);
+            }
+        });
 
         jButtonXoa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonXoa.setText("Xóa");
+        jButtonXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonXoaActionPerformed(evt);
+            }
+        });
 
         jButtonSua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonSua.setText("Sửa");
+        jButtonSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSuaActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -78,6 +129,11 @@ public class QuanLyLoai extends javax.swing.JPanel {
 
         jButtonThem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonThem.setText("Thêm");
+        jButtonThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -138,12 +194,59 @@ public class QuanLyLoai extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemActionPerformed
+        // TODO add your handling code here:
+        Loai loai = new Loai(jTextFieldMaLoai.getText(), jTextFieldTenLoai.getText());
+        if(dAOLoai.addLoai(loai) == 1)
+            JOptionPane.showMessageDialog(jButtonSua, " Thêm thành công! ");
+        else
+            JOptionPane.showConfirmDialog(jButtonSua, " Thêm không thành công! ");
+        
+        showTable();
+    }//GEN-LAST:event_jButtonThemActionPerformed
+
+    private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
+        // TODO add your handling code here:
+        Loai loai = new Loai(jTextFieldMaLoai.getText(), jTextFieldTenLoai.getText());
+        if (dAOLoai.updateLoai(loai) == 1) 
+            JOptionPane.showConfirmDialog(jButtonSua, " Sửa thành công! ");
+        else 
+            JOptionPane.showConfirmDialog(jButtonSua, " Sửa không thành công! ");
+        
+        showTable();
+    }//GEN-LAST:event_jButtonSuaActionPerformed
+
+    private void jButtonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXoaActionPerformed
+        // TODO add your handling code here:
+        Loai loai = new Loai(jTextFieldMaLoai.getText(), jTextFieldTenLoai.getText());
+        if(dAOLoai.updateLoai(loai) ==1)
+            JOptionPane.showConfirmDialog(jButtonSua, " Xóa thành công! ");
+        else
+            JOptionPane.showConfirmDialog(jButtonSua, " Xoa không thành công! ");
+        
+        showTable();
+    }//GEN-LAST:event_jButtonXoaActionPerformed
+
+    private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Loai> list =  dAOLoai.searchLoai(jTextFieldMaLoai.getText());
+        DefaultTableModel tabbleLoai = (DefaultTableModel) jTableQuanLyLoaiSanPham.getModel();
+        tabbleLoai.setRowCount(0);
+        
+        for(Loai loai: list){
+            tabbleLoai.addRow(new Object[]{
+                loai.getMaloai(), loai.getTenloai()
+            });
+        }
+    }//GEN-LAST:event_jButtonTimKiemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSua;
     private javax.swing.JButton jButtonThem;
     private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JButton jButtonXoa;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
@@ -152,4 +255,6 @@ public class QuanLyLoai extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldMaLoai;
     private javax.swing.JTextField jTextFieldTenLoai;
     // End of variables declaration//GEN-END:variables
+
+    
 }

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,12 +21,9 @@ import java.util.logging.Logger;
  * @author ADMIN
  */
 public class DAOLoai {
-    CFConnection cfconn;
-    Connection conn;
+    Connection conn = new  CFConnection().getConn();
 
-    public DAOLoai(CFConnection cfconn) {
-        this.cfconn = cfconn;
-        conn = cfconn.getConn();
+    public DAOLoai() {
     }
     
     public int addLoai(Loai l){
@@ -35,7 +33,7 @@ public class DAOLoai {
             Statement statement =  conn.createStatement();
             n = statement.executeUpdate(sql);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            return 0;
         }
         return n;
     }
@@ -66,25 +64,39 @@ public class DAOLoai {
         return n;
     }
     
-    public void displayAll(){
-        String sql = "select * from tbl_Loai";
+    public ArrayList <Loai> searchLoai(String ma){
+        ArrayList <Loai> loai = new ArrayList<>();
+        String sql = "SELECT * FROM tbl_Loai where MaLoai like '%"+ ma +"%'";
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()){
                 String maLoai = resultSet.getString("MaLoai");
                 String tenLoai = resultSet.getString("TenLoai");
-                Loai loai = new Loai(maLoai, tenLoai);
-                System.out.println(loai);
+                loai.add(new Loai(maLoai, tenLoai));
             }
+            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return loai;
     }
-    public static void main(String[] args) {
-        CFConnection conn = new CFConnection();
-        DAOLoai dloai = new DAOLoai(conn);
-        Loai l = new Loai("L01","Espresso");
-        System.out.println(dloai.updateLoai(l));
+    
+    public ArrayList <Loai> displayAll(){
+        ArrayList <Loai> loai = new ArrayList<>();
+        String sql = "SELECT * FROM tbl_Loai";
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                String maLoai = resultSet.getString("MaLoai");
+                String tenLoai = resultSet.getString("TenLoai");
+                loai.add(new Loai(maLoai, tenLoai));
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return loai;
     }
 }

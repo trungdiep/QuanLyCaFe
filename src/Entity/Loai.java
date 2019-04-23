@@ -13,6 +13,9 @@ public class Loai {
     private String maloai;
     private String tenloai;
 
+    public Loai() {
+    }
+    
     public Loai(String maloai, String tenloai) {
         this.maloai = maloai;
         this.tenloai = tenloai;
