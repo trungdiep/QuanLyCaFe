@@ -8,11 +8,10 @@
             <file>file:/A:/BTL_Java/QuanLyCafe/src/Form/FormQuanLy.java</file>
             <file>file:/A:/BTL_Java/QuanLyCafe/src/DAO/DAOLoai.java</file>
             <file>file:/A:/BTL_Java/QuanLyCafe/src/Entity/Loai.java</file>
+            <file>file:/A:/BTL_Java/QuanLyCafe/src/Connection/CFConnection.java</file>
             <file>file:/A:/BTL_Java/QuanLyCafe/src/Tabs/QuanLyLoai.java</file>
             <file>file:/A:/BTL_Java/QuanLyCafe/src/DAO/DAOUser.java</file>
             <file>file:/A:/BTL_Java/QuanLyCafe/src/DAO/DBConnection.java</file>
-            <file>file:/A:/BTL_Java/QuanLyCafe/src/DAO/DAOSanPham.java</file>
-            <file>file:/E:/QuanLyCaFe/src/DAO/DAOHDB.java</file>
         </group>
     </open-files>
 </project-private>
