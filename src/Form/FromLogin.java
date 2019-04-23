@@ -7,6 +7,7 @@ package Form;
 
 import Connection.CFConnection;
 import DAO.DAOUser;
+import Tabs.ThanhToan;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class FromLogin extends javax.swing.JFrame {
      */
     public FromLogin() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -141,29 +143,32 @@ public class FromLogin extends javax.swing.JFrame {
              try {
             CFConnection conn = new CFConnection();
             DAOUser use = new DAOUser(conn);
-            short b = use.checkUser(txtUser.getText(), txtPass.getText());
-            if(b == 1)  {
+            String[] arr = use.checkUser(txtUser.getText(),txtPass.getText());
+            int role = Integer.valueOf(arr[0]);
+            if(role == 1)  {
                 JOptionPane.showMessageDialog(this,"Dang nhap admin thanh cong");
                 this.dispose();
+                new FormQuanLy().setVisible(true);
                 
             }
-            else  if(b==0){
+            else  if(role==0){
                 JOptionPane.showMessageDialog(this,"Dang nhap nhan vien thanh cong");
                 this.dispose();
-                new NhanVien().setVisible(true);
+                new NhanVien(arr[1]).setVisible(true);
             }
-            else if(b==3){
+            else if(role==3){
                 JOptionPane.showMessageDialog(this,"Sai User hoac Password !!!");
             }
         }
         catch(Exception ex)  {
             
             }
-        }
-        
-         
+        }  
     }//GEN-LAST:event_btnLoginActionPerformed
-
+    public String getTextUser() {
+        return txtUser.getText();
+    }
+            
     /**
      * @param args the command line arguments
      */
@@ -210,6 +215,8 @@ public class FromLogin extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FromLogin().setVisible(true);
+                FromLogin f = new FromLogin();
+                
             }
         });
     }

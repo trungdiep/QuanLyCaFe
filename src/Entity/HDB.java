@@ -11,20 +11,43 @@ package Entity;
  */
 public class HDB {
     private String mahdb;
-    private String ngayban;
     private String manv;
     private String makh;
-    private String tongtien;
+    private Double tongtien;
 
+    public HDB(String mahdb, String manv, String makh, Double tongtien) {
+        this.mahdb = mahdb;
+        this.manv = manv;
+        this.makh = makh;
+        this.tongtien = tongtien;
+    }
+
+    public String getMahdb() {
+        return mahdb;
+    }
+
+
+
+    public String getManv() {
+        return manv;
+    }
+
+    public String getMakh() {
+        return makh;
+    }
+
+    public Double getTongtien() {
+        return tongtien;
+    }
+
+    
     public void setMahdb(String mahdb) throws Exception {
         this.mahdb = mahdb;
         if(this.mahdb == "")
             throw new Exception("ko de ma hoa don trong");
     }
 
-    public void setNgayban(String ngayban) {
-        this.ngayban = ngayban;
-    }
+
 
     public void setManv(String manv) throws Exception {
         this.manv = manv;
@@ -38,7 +61,7 @@ public class HDB {
             throw new Exception("ko de ma hoa don trong");
     }
 
-    public void setTongtien(String tongtien) {
+    public void setTongtien(Double tongtien) {
         this.tongtien = tongtien;
     }
     

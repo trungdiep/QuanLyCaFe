@@ -78,21 +78,39 @@ public class DAOUser {
         n = state.executeUpdate(sql);
         return n ;
     }
-    public  short checkUser(String user,String password)  {
+    public  String[] checkUser(String user,String password)  {
         ResultSet rs = null;
-        short role = 3; //role = 3 sai mat khau   
+        String[] role = new String[2]; //role = 3 sai mat khau   
         try {
-            String sql = "select Role_User from tbl_User where Username = '"+ user +"' and Password = '" + password +"'";
+            String sql = "select Role_User, MaNhanVien from tbl_User where Username = '"+ user +"' and Password = '" + password +"'";
             Statement state = conn.createStatement();
             rs  = state.executeQuery(sql);
             while(rs.next())    {
-                role = rs.getShort("Role_User");
+                role[0] = String.valueOf(rs.getShort("Role_User"));
+                role[1] = rs.getString("MaNhanVien");
             }
         }
         catch(SQLException ex)  {
             System.out.println("loi");
         }     
         return role;
+    }
+    public String getMaNhanVien(String user) {
+        ResultSet rs = null;
+        String sql = "select MaNhanVien from tbl_User where User = '" + user +"'";
+        String manv = null ; 
+        Statement stm;
+        try {
+            stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+            if(rs.next())
+            {
+                manv = rs.getString("MaNhanVien");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return manv;
     }
     public static void main(String[] args) throws SQLException {
         CFConnection conn = new CFConnection();

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,23 +98,40 @@ public class DAOKhachHang {
         return n;
     }
     
-    public ResultSet displayAll(){
-        String sql=" select * from tbl_KhachHang";
-        ResultSet resultSet = null;
+    public String displayMaKhacHang(String tenkh){
+        String sql=" select MaKhachHang from tbl_KhachHang where TenKhachHang = '" + tenkh + "'";
+        ResultSet resultSet;
+        String makh = null;
         try {
             Statement statement = conn.createStatement();
             resultSet = statement.executeQuery(sql);
+            if(resultSet.next())    {
+                makh = resultSet.getString("MaKhachHang");
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return resultSet;
+        return makh;
     }
+    public ResultSet displayAll()   {
+        String sql = "select * from tbl_KhachHang ";
+        ResultSet resultSet = null;
+        try {
+            Statement stm = conn.createStatement();
+            resultSet = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  resultSet;
+    }
+                
     public ResultSet display()  {
         String sql=" select TenKhachHang from tbl_KhachHang";
         ResultSet resultSet = null;
         try {
             Statement statement = conn.createStatement();
             resultSet = statement.executeQuery(sql);
+           
         } catch (SQLException ex) {
            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE,null,ex);
         }

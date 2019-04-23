@@ -13,10 +13,18 @@ public class CTHDB {
     private String mahdb;
     private String masp;
     private String tensp;
-    private String soluong;
-    private String thanhtien;
-    private String khuyenmai;
+    private int soluong;
+    private Double thanhtien;
 
+    public CTHDB(String mahdb, String masp, String tensp, int soluong, Double thanhtien) {
+        this.mahdb = mahdb;
+        this.masp = masp;
+        this.tensp = tensp;
+        this.soluong = soluong;
+        this.thanhtien = thanhtien;
+    }
+
+    
     public String getMahdb() {
         return mahdb;
     }
@@ -29,45 +37,38 @@ public class CTHDB {
         return tensp;
     }
 
-    public String getSoluong() {
+    public int getSoluong() {
         return soluong;
     }
 
-    public String getThanhtien() {
+    public Double getThanhtien() {
         return thanhtien;
     }
 
-    public String getKhuyenmai() {
-        return khuyenmai;
-    }
-
-    public void setMahdb(String mahdb) throws Exception{
+    public void setMahdb(String mahdb) {
         this.mahdb = mahdb;
-        if(this.mahdb == null)
-            throw new Exception("ko de ma hoa don ban trong");
     }
 
-    public void setMasp(String masp) throws Exception {
+    public void setMasp(String masp) {
         this.masp = masp;
-         if(this.masp == "")
-            throw  new Exception("ko de ma san pham trong");
     }
 
     public void setTensp(String tensp) {
         this.tensp = tensp;
     }
 
-    public void setSoluong(String soluong) {
+    public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
 
-    public void setThanhtien(String thanhtien) {
+    public void setThanhtien(Double thanhtien) {
         this.thanhtien = thanhtien;
     }
 
-    public void setKhuyenmai(String khuyenmai) {
-        this.khuyenmai = khuyenmai;
+    @Override
+    public String toString() {
+        return "CTHDB{" + "mahdb=" + mahdb + ", masp=" + masp + ", tensp=" + tensp + ", soluong=" + soluong + ", thanhtien=" + thanhtien + '}';
     }
-    
-    
+
+  
 }

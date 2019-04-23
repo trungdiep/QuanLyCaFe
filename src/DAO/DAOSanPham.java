@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -143,17 +144,52 @@ public class DAOSanPham {
         }
        return rs;
     }
-    public static void main(String[] args) {
-        CFConnection conn = new CFConnection();
-        DAOSanPham daosp = new DAOSanPham(conn);
-        SanPham sp = new SanPham("SP01","computrino","L01",570000.0);
-        //System.out.println(daosp.insertSanPham(sp));
+    public ResultSet displayPrice(String tensp)  {
+        String sql = "select GiaBan from tbl_SanPham where TenSanPham = '" + tensp + "'";
+        ResultSet rs = null;
+        try {
+            Statement statement = conn.createStatement();
+            rs = statement.executeQuery(sql);
+        } catch (SQLException ex)  {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE,null,ex);
+        }
+       return rs;
+    }
+    public String displayMaSP(String tensp)  {
+        String sql = "select MaSanPham from tbl_SanPham where TenSanPham = '" + tensp + "'";
+        String masp = null;
+        ResultSet rs;
        try {
-           while(daosp.display().next())   {
-               System.out.println(daosp.display().getString("TenSanPham"));
+           Statement stm = conn.createStatement();
+           rs = stm.executeQuery(sql);
+           while(rs.next()) {
+               masp = rs.getString("MaSanPham");
            }
        } catch (SQLException ex) {
            Logger.getLogger(DAOSanPham.class.getName()).log(Level.SEVERE, null, ex);
        }
+        return masp;
+    }
+    public HashMap getHashMap() {
+        String sql = "select MaSanPham,TenSanPham from tbl_SanPham ";
+        HashMap<String,String> hm = new HashMap();
+        
+       try {
+           Statement stm = conn.createStatement();
+           ResultSet rs = stm.executeQuery(sql);
+           while(rs.next()) {
+               hm.put(rs.getString("TenSanPham"),rs.getString("MaSanPham"));
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(DAOSanPham.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return hm;
+    }
+    public static void main(String[] args) throws SQLException {
+        CFConnection conn = new CFConnection();
+        DAOSanPham daosp = new DAOSanPham(conn);
+        //SanPham sp = new SanPham("SP01","computrino","L01",570000.0);
+        //System.out.println(daosp.insertSanPham(sp));
+        System.out.println(daosp.displayMaSP("computrino"));
     }
 }
