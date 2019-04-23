@@ -24,6 +24,7 @@ public class NhanVien extends javax.swing.JFrame {
         initComponents();
         tbdNhanVien.addTab("Thanh toan", new ThanhToan(employeecode));
         tbdNhanVien.addTab("Khach hang", new KH());
+        setLocationRelativeTo(null);
     }
 
     private NhanVien() {

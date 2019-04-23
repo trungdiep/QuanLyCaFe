@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -154,14 +155,41 @@ public class DAOSanPham {
         }
        return rs;
     }
+    public String displayMaSP(String tensp)  {
+        String sql = "select MaSanPham from tbl_SanPham where TenSanPham = '" + tensp + "'";
+        String masp = null;
+        ResultSet rs;
+       try {
+           Statement stm = conn.createStatement();
+           rs = stm.executeQuery(sql);
+           while(rs.next()) {
+               masp = rs.getString("MaSanPham");
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(DAOSanPham.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        return masp;
+    }
+    public HashMap getHashMap() {
+        String sql = "select MaSanPham,TenSanPham from tbl_SanPham ";
+        HashMap<String,String> hm = new HashMap();
+        
+       try {
+           Statement stm = conn.createStatement();
+           ResultSet rs = stm.executeQuery(sql);
+           while(rs.next()) {
+               hm.put(rs.getString("TenSanPham"),rs.getString("MaSanPham"));
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(DAOSanPham.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return hm;
+    }
     public static void main(String[] args) throws SQLException {
         CFConnection conn = new CFConnection();
         DAOSanPham daosp = new DAOSanPham(conn);
         //SanPham sp = new SanPham("SP01","computrino","L01",570000.0);
         //System.out.println(daosp.insertSanPham(sp));
-       ResultSet rs  = daosp.displayPrice("computrino");
-       while(rs.next()) {
-           System.out.println(rs.getString("GiaBan"));
-       }
+        System.out.println(daosp.displayMaSP("computrino"));
     }
 }

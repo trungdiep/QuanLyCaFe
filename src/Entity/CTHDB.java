@@ -65,5 +65,10 @@ public class CTHDB {
         this.thanhtien = thanhtien;
     }
 
+    @Override
+    public String toString() {
+        return "CTHDB{" + "mahdb=" + mahdb + ", masp=" + masp + ", tensp=" + tensp + ", soluong=" + soluong + ", thanhtien=" + thanhtien + '}';
+    }
+
   
 }

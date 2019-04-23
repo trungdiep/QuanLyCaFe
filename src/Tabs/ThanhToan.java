@@ -10,22 +10,32 @@ import DAO.DAOCTHDB;
 import DAO.DAOHDB;
 import DAO.DAOKhachHang;
 import DAO.DAOSanPham;
-import DAO.DAOUser;
+import Entity.CTHDB;
 import Entity.HDB;
-import Form.FromLogin;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.Position;
+import javax.swing.text.Segment;
 
 /**
  *
@@ -84,6 +94,7 @@ public class ThanhToan extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         txtmaNhanVien = new javax.swing.JTextField();
         show_validation_here = new javax.swing.JLabel();
+        btnIn = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Ten KH:");
@@ -155,24 +166,21 @@ public class ThanhToan extends javax.swing.JPanel {
         });
 
         txtmaHD.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        txtmaHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmaHDActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Ma NhanVien :");
 
         txtmaNhanVien.setEditable(false);
         txtmaNhanVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        txtmaNhanVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmaNhanVienActionPerformed(evt);
-            }
-        });
 
         show_validation_here.setForeground(new java.awt.Color(255, 51, 51));
+
+        btnIn.setText("Printf");
+        btnIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -187,7 +195,8 @@ public class ThanhToan extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnNewHD)
-                                .addComponent(btnNewHD1)))
+                                .addComponent(btnNewHD1)
+                                .addComponent(btnIn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -229,7 +238,7 @@ public class ThanhToan extends javax.swing.JPanel {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cboKH, cboSP, txtSL});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnNewHD, btnNewHD1});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnIn, btnNewHD, btnNewHD1});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,24 +274,26 @@ public class ThanhToan extends javax.swing.JPanel {
                         .addComponent(show_validation_here)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
                         .addComponent(btnNewHD)
                         .addGap(13, 13, 13)
-                        .addComponent(btnNewHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
+                        .addComponent(btnNewHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnIn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel6, jLabel8});
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboKH, cboSP, txtSL});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnNewHD, btnNewHD1});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnIn, btnNewHD, btnNewHD1});
 
     }// </editor-fold>//GEN-END:initComponents
    
@@ -330,28 +341,34 @@ public class ThanhToan extends javax.swing.JPanel {
         CFConnection conn = new CFConnection();
         DAOCTHDB dcthdb = new DAOCTHDB(conn);
         DAOKhachHang dkh = new DAOKhachHang(conn);
+        DAOSanPham dsp = new DAOSanPham(conn);
         DAOHDB hdb = new DAOHDB(conn);
+        int n = 1;
         Double totalmoney = Double.valueOf(txtThanhTien.getText());
         String makh = dkh.displayMaKhacHang(cboKH.getSelectedItem().toString());
         System.out.println(totalmoney + " - " + txtmaNhanVien.getText() + " - " +makh+ " - " + txtmaHD.getText());
         HDB hd = new HDB(txtmaHD.getText(),txtmaNhanVien.getText(),makh,totalmoney);
-        if(hdb.addHDB(hd) == 1) {
+        int kt = hdb.addHDB(hd);
+        System.out.println(kt);
+        for(int i = 0;i<table1.getRowCount();i++)   {
+             Vector vDongDaChon = (Vector) tableRecord.get(i);
+             String tensp = vDongDaChon.get(1).toString();
+             String masp = dsp.displayMaSP(tensp);
+             int sl = Integer.valueOf(vDongDaChon.get(2).toString());
+             Double thanhtien = Double.valueOf(vDongDaChon.get(3).toString());
+             CTHDB ct = new CTHDB(txtmaHD.getText(),masp, tensp, sl, thanhtien);
+             System.out.println(ct.toString());
+             n = dcthdb.addCTDHB(ct);
+             System.out.println(n);
+        }
+        if( kt == 1 && n ==1) {
             JOptionPane.showMessageDialog(this,"them thanh cong");
         }
         else
         {
             JOptionPane.showMessageDialog(this,"Loi !!!");
         }
-        
     }//GEN-LAST:event_btnNewHD1ActionPerformed
-
-    private void txtmaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmaHDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtmaHDActionPerformed
-
-    private void txtmaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmaNhanVienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtmaNhanVienActionPerformed
 
     private void txtSLKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSLKeyTyped
         // TODO add your handling code here:
@@ -360,6 +377,20 @@ public class ThanhToan extends javax.swing.JPanel {
             evt.consume();
         }
     }//GEN-LAST:event_txtSLKeyTyped
+
+    private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
+        // TODO add your handling code here:
+        try {
+            MessageFormat heardFormat = new MessageFormat("Thanh Toan");
+            MessageFormat footerFormat = new MessageFormat("- {0} -");
+            table1.print(JTable.PrintMode.FIT_WIDTH,heardFormat,footerFormat,true, new HashPrintRequestAttributeSet(),true);
+        } catch (PrinterException ex) {
+            Logger.getLogger(ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error: " + ex.getMessage());
+        } catch (HeadlessException ex) {
+            Logger.getLogger(ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnInActionPerformed
     private  Vector addRow()  {
         CFConnection conn = new CFConnection();
         DAO.DAOSanPham dsp = new DAOSanPham(conn);
@@ -405,17 +436,23 @@ public class ThanhToan extends javax.swing.JPanel {
         }
         
         DAO.DAOSanPham dsp = new DAOSanPham(conn);
-        ResultSet rsp = dsp.display();
+        /**ResultSet rsp = dsp.display();
         while (rsp.next()) {
             cboSP.addItem(rsp.getString("TenSanPham"));
+        }*/
+        Set set = dsp.getHashMap().entrySet();
+        Iterator i  = set.iterator();
+        while(i.hasNext())  {
+            Map.Entry me = (Map.Entry) i.next();
+            cboSP.addItem((String) me.getKey());
         }
-        
         DefaultTableModel model = new DefaultTableModel();
         
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addSanPham;
+    private javax.swing.JButton btnIn;
     private javax.swing.JButton btnNewHD;
     private javax.swing.JButton btnNewHD1;
     private javax.swing.JComboBox<String> cboKH;

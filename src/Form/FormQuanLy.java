@@ -31,7 +31,7 @@ public class FormQuanLy extends javax.swing.JFrame {
         tbnMain.addTab("Quản lý loại sản phẩm", new QuanLyLoai());
         tbnMain.addTab("Quản lý hóa đơn bán", new QuanLyHoaDonBan());
         tbnMain.addTab("Quản lý CTHDB", new QuanLyCTHDB());
-        
+        setLocationRelativeTo(null);
     }
 
     /**

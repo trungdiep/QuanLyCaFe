@@ -23,6 +23,7 @@ public class FromLogin extends javax.swing.JFrame {
      */
     public FromLogin() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

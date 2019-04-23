@@ -82,7 +82,7 @@ public class DAOHDB {
         CFConnection conn = new CFConnection();
         DAOHDB dhd = new DAOHDB(conn);
         DAOHDB ct = new DAOHDB(conn);
-            HDB hd = new HDB("HD01","NV01","KH01",57000.0);
+            HDB hd = new HDB("HD04","NV00","KH01",57000.0);
         System.out.println(ct.addHDB(hd));
     }
         
