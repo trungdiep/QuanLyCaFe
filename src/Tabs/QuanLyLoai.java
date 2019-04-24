@@ -5,7 +5,9 @@
  */
 package Tabs;
 
+import Connection.CFConnection;
 import DAO.DAOLoai;
+import DAO.DAOUser;
 import Entity.Loai;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -18,7 +20,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLyLoai extends javax.swing.JPanel {
     
-    DAOLoai dAOLoai = new DAOLoai();
+         CFConnection conn = new CFConnection();
+        DAOLoai dAOLoai = new DAOLoai(conn);
     
     /**
      * Creates new form QuanLyLoai
@@ -216,8 +219,7 @@ public class QuanLyLoai extends javax.swing.JPanel {
 
     private void jButtonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXoaActionPerformed
         // TODO add your handling code here:
-        Loai loai = new Loai(jTextFieldMaLoai.getText(), jTextFieldTenLoai.getText());
-        if(dAOLoai.updateLoai(loai) ==1)
+        if(dAOLoai.removeLoai(jTextFieldMaLoai.getText()) ==1)
             JOptionPane.showConfirmDialog(jButtonSua, " Xóa thành công! ");
         else
             JOptionPane.showConfirmDialog(jButtonSua, " Xoa không thành công! ");

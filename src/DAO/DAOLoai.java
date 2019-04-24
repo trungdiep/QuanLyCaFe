@@ -21,9 +21,11 @@ import java.util.logging.Logger;
  * @author ADMIN
  */
 public class DAOLoai {
-    Connection conn = new  CFConnection().getConn();
-
-    public DAOLoai() {
+    CFConnection cfconn;
+    Connection conn;
+    public DAOLoai(CFConnection cfconn)   {
+        this.cfconn = cfconn;
+        this.conn=cfconn.getConn();
     }
     
     public int addLoai(Loai l){
@@ -98,5 +100,10 @@ public class DAOLoai {
             ex.printStackTrace();
         }
         return loai;
+    }
+    public static void main(String[] args) {
+        CFConnection conn = new CFConnection();
+        DAOLoai dl = new DAOLoai(conn);
+        System.out.println(dl.removeLoai("L02"));
     }
 }
