@@ -32,15 +32,14 @@ public class DAOCTHDB {
     }
     public int addCTDHB(CTHDB ct)  {
         int n  = 0;
-        String sql = "insert into tbl_CTHDB (MaHoaDonBan,MaSanPham,TenSanPham,SoLuong,ThanhTien) values (?,?,?,?,?)";
+        String sql = "insert into tbl_CTHDB (MaSanPham,TenSanPham,SoLuong,ThanhTien) values (?,?,?,?)";
         PreparedStatement pre;
         try {
             pre  = conn.prepareStatement(sql);
-            pre.setString(1,ct.getMahdb());
-            pre.setString(2,ct.getMasp());
-            pre.setString(3,ct.getTensp());
-            pre.setInt(4,ct.getSoluong());
-            pre.setDouble(5,ct.getThanhtien());
+            pre.setString(1,ct.getMasp());
+            pre.setString(2,ct.getTensp());
+            pre.setInt(3,ct.getSoluong());
+            pre.setDouble(4,ct.getThanhtien());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAOCTHDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,13 +103,14 @@ public class DAOCTHDB {
     public static void main(String[] args) throws SQLException {
         CFConnection conn = new CFConnection();
         DAOCTHDB dct = new DAOCTHDB(conn);
-        CTHDB ct = new  CTHDB("HD01","SP01", "computrino",1,77000.0);
+        CTHDB ct = new  CTHDB("SP001", "computrino",1,77000.0);
+        System.out.println(dct.addCTDHB(ct));
         //System.out.println(dct.updateCTHDB(ct));
         //System.out.println(dct.removeCTHDB("HD01"));
-        ResultSet rs = dct.thongke("2019/04/23", "2019/04/24");
-        while(rs.next())    {
-            System.out.println(rs.getString(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+"-"+rs.getInt(4)+"-"+rs.getDouble(5));
-        }
+       // ResultSet rs = dct.thongke("2019/04/23", "2019/04/24");
+        ///while(rs.next())    {
+        //    System.out.println(rs.getString(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+"-"+rs.getInt(4)+"-"+rs.getDouble(5));
+        //}
         
       
         

@@ -25,6 +25,10 @@ public class Loai {
         this.tenloai = tenloai;
     }
 
+    public void  Loai(String tenloai) {
+        this.tenloai = tenloai;
+    }
+
     
     public String getMaloai() {
         return maloai;

@@ -24,6 +24,13 @@ public class CTHDB {
         this.thanhtien = thanhtien;
     }
 
+    public CTHDB(String masp, String tensp, int soluong, Double thanhtien) {
+        this.masp = masp;
+        this.tensp = tensp;
+        this.soluong = soluong;
+        this.thanhtien = thanhtien;
+    }
+
     
     public String getMahdb() {
         return mahdb;
@@ -65,7 +72,6 @@ public class CTHDB {
         this.thanhtien = thanhtien;
     }
 
-    @Override
     public String toString() {
         return "CTHDB{" + "mahdb=" + mahdb + ", masp=" + masp + ", tensp=" + tensp + ", soluong=" + soluong + ", thanhtien=" + thanhtien + '}';
     }

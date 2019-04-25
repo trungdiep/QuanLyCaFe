@@ -32,13 +32,12 @@ public class DAOKhachHang {
 
     public int addKhachHang(KhachHang kh) {
         int n = 0;
-        String sql = "insert into tbl_KhachHang (MaKhachHang,TenKhachHang,Sdt) values(?,?,?)";
+        String sql = "insert into tbl_KhachHang (TenKhachHang,Sdt) values(?,?)";
         PreparedStatement pre;
         try {
             pre = conn.prepareStatement(sql);
-            pre.setString(1, kh.getMakh());
-            pre.setString(2, kh.getTenkh());
-            pre.setString(3, kh.getSdt());
+            pre.setString(1, kh.getTenkh());
+            pre.setString(2, kh.getSdt());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE,null,ex);
@@ -46,15 +45,15 @@ public class DAOKhachHang {
         return n;
     }
 
-    public int updateKhachHang(KhachHang kh) {
+    public int updateKhachHang(KhachHang kh,String sdt) {
         int n = 0;
 
-        String sql = "update tbl_KhachHang set TenKhachHang = ?, Sdt = ? where MaKhachHang = ?";
+        String sql = "update tbl_KhachHang set TenKhachHang = ?, Sdt = ? where tbl_KhachHang.Sdt = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, kh.getTenkh());
             preparedStatement.setString(2, kh.getSdt());
-            preparedStatement.setString(3, kh.getMakh());
+            preparedStatement.setString(3, sdt);
             n = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -86,9 +85,9 @@ public class DAOKhachHang {
         return n;
     }
     
-    public int removeKhachHang(String maKhachHang){
+    public int removeKhachHang(String sdt){
         int n = 0;
-        String sql = "delete from tbl_KhachHang where MaKhachHang = '"+ maKhachHang +"'";
+        String sql = "delete from tbl_KhachHang where Sdt = '"+ sdt +"'";
         try {
             Statement statement = conn.createStatement();
             n = statement.executeUpdate(sql);
@@ -137,11 +136,52 @@ public class DAOKhachHang {
         }
     return resultSet;
     }
+    public ResultSet Search(String sdt) {
+        ResultSet rs = null;
+        String sql = "select * from tbl_KhachHang where Sdt = '"+sdt+"'";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    public ResultSet getTop10(String start,String end)  {
+        ResultSet rs = null;
+        String sql = "select top 10 tbl_KhachHang.MaKhachHang,tbl_KhachHang.TenKhachHang,tbl_KhachHang.Sdt,COUNT(tbl_KhachHang.MaKhachHang) as 'Số lần mượn'"
+                + " from tbl_HoaDonBan inner join tbl_KhachHang on tbl_HoaDonBan.MaKhachHang=tbl_KhachHang.MaKhachHang" +
+                " where tbl_HoaDonBan.NgayBan between '"+start+"' and '"+end+"' "
+                + "Group by tbl_KhachHang.MaKhachHang,tbl_KhachHang.TenKhachHang,tbl_KhachHang.Sdt Order by COUNT(tbl_KhachHang.MaKhachHang) DESC";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rs;
+    }
+    public ResultSet thongke()  {
+        ResultSet rs = null;
+        String sql = "select top 10 tbl_KhachHang.MaKhachHang,tbl_KhachHang.TenKhachHang,tbl_KhachHang.Sdt,COUNT(tbl_KhachHang.MaKhachHang) as 'Số lần mượn' " +
+                    "from tbl_HoaDonBan  inner join tbl_KhachHang on tbl_HoaDonBan.MaKhachHang=tbl_KhachHang.MaKhachHang " +
+                    "Group by tbl_KhachHang.MaKhachHang,tbl_KhachHang.TenKhachHang,tbl_KhachHang.Sdt Order by COUNT(tbl_KhachHang.MaKhachHang) ASC";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
     public static void main(String[] args) throws SQLException {
         CFConnection conn = new CFConnection();
         DAOKhachHang daokh = new DAOKhachHang(conn);
-        KhachHang khach = new KhachHang("KH02","0334031515","Diep Van Trung");
-        System.out.println(daokh.addKhachHang(khach));
+       // KhachHang khach = new KhachHang("KH02","0334031515","Diep Van Trung");
+        //System.out.println(daokh.addKhachHang(khach));
+
+        System.out.println(daokh.removeKhachHang("01697692421"));
     }
 
     public int addKhachHang(Tabs.KH kh) {

@@ -7,7 +7,7 @@ package Form;
 
 import Tabs.QuanLyCTHDB;
 import Tabs.QuanLyHoaDonBan;
-import Tabs.QuanLyKhachHang;
+import Tabs.ThongKeKhachHang;
 import Tabs.QuanLyLoai;
 import Tabs.QuanLyNguoiDung;
 import Tabs.QuanLyNhanVien;
@@ -25,7 +25,7 @@ public class FormQuanLy extends javax.swing.JFrame {
     public FormQuanLy() {
         initComponents();
         tbnMain.addTab("Quản lý nhân viên", new QuanLyNhanVien());
-        tbnMain.addTab("Quản lý khách hàng", new QuanLyKhachHang());
+        tbnMain.addTab("Quản lý khách hàng", new ThongKeKhachHang());
         tbnMain.addTab("Quản lý người dùng", new QuanLyNguoiDung());
         tbnMain.addTab("Quản lý sản phẩm", new QuanLySanPham());
         tbnMain.addTab("Quản lý loại sản phẩm", new QuanLyLoai());
@@ -54,15 +54,11 @@ public class FormQuanLy extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tbnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tbnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tbnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tbnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
         );
 
         pack();

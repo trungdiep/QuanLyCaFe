@@ -34,6 +34,12 @@ public class SanPham {
         this.maloai = maloai;
         this.giaban = giaban;
     }
+
+    public void SanPham(String tensp, String maloai, Double giaban) {
+        this.tensp = tensp;
+        this.maloai = maloai;
+        this.giaban = giaban;
+    }
     
     public void setMasp(String masp) throws Exception {
         this.masp = masp;

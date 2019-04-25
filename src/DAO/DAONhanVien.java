@@ -9,6 +9,7 @@ import Entity.NhanVien;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +68,18 @@ public class DAONhanVien {
             Logger.getLogger(DAONhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }   
         return n;
+    }
+    private ResultSet displayAll()  {
+        ResultSet rs = null;
+        String sql = "select * from tbl_NhanVien";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAONhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
     }
     public static void main(String[] args) {
         CFConnection conn = new CFConnection();

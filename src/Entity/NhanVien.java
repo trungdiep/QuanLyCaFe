@@ -28,6 +28,15 @@ public class NhanVien {
         this.sdt = sdt;
     }
 
+    public NhanVien(String tennv, String noio, String gioitinh, String ngaysinh, String que, String sdt) {
+        this.tennv = tennv;
+        this.noio = noio;
+        this.gioitinh = gioitinh;
+        this.ngaysinh = ngaysinh;
+        this.que = que;
+        this.sdt = sdt;
+    }
+
     
     
     public String getManv() {

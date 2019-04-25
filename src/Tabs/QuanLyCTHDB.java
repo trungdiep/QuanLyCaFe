@@ -25,6 +25,8 @@ public class QuanLyCTHDB extends javax.swing.JPanel {
     /**
      * Creates new form QuanLyCTHDB
      */
+    CFConnection conn = new CFConnection();
+    DAOCTHDB cthd = new DAOCTHDB(conn);
     public QuanLyCTHDB() {
         initComponents();
         LoadData();
@@ -43,17 +45,16 @@ public class QuanLyCTHDB extends javax.swing.JPanel {
         jButtonThem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableQuanLySanPham = new javax.swing.JTable();
-        jButtonSua = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jFormattedTextFieldStart = new javax.swing.JFormattedTextField();
         jFormattedTextFieldEnd = new javax.swing.JFormattedTextField();
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Quản lý CTHDB");
 
-        jButtonThem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonThem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButtonThem.setText("Thống kế");
         jButtonThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,41 +62,40 @@ public class QuanLyCTHDB extends javax.swing.JPanel {
             }
         });
 
+        jTableQuanLySanPham.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jTableQuanLySanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã hóa đơn bán", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Thành tiền"
+                "STT", "Mã hóa đơn bán", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTableQuanLySanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTableQuanLySanPham);
         if (jTableQuanLySanPham.getColumnModel().getColumnCount() > 0) {
-            jTableQuanLySanPham.getColumnModel().getColumn(0).setResizable(false);
             jTableQuanLySanPham.getColumnModel().getColumn(1).setResizable(false);
             jTableQuanLySanPham.getColumnModel().getColumn(2).setResizable(false);
             jTableQuanLySanPham.getColumnModel().getColumn(3).setResizable(false);
+            jTableQuanLySanPham.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButtonSua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonSua.setText("In");
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("Ngày kết thúc : ");
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setText("Ngày bắt đầu");
 
         try {
-            jFormattedTextFieldStart.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+            jFormattedTextFieldStart.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -103,7 +103,7 @@ public class QuanLyCTHDB extends javax.swing.JPanel {
         jFormattedTextFieldStart.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         try {
-            jFormattedTextFieldEnd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+            jFormattedTextFieldEnd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -114,57 +114,63 @@ public class QuanLyCTHDB extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextFieldStart, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextFieldEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(154, 154, 154)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonThem, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jButtonSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(212, 212, 212))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFormattedTextFieldStart, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonThem)
+                .addGap(213, 213, 213))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel4, jLabel9});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jButtonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jFormattedTextFieldEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFormattedTextFieldStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFormattedTextFieldEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel4, jLabel9});
+
     }// </editor-fold>//GEN-END:initComponents
     private void LoadData() {
-        CFConnection conn = new CFConnection();
-        DAOCTHDB cthd = new DAOCTHDB(conn);
+        
         ResultSet rs = cthd.displayAll();
         jTableQuanLySanPham.removeAll();
-        String[] arr = {"Mã hóa đơn","Mã sản phẩm","Tên sản phẩm","Số lượng","Thành Tiền"};
+        int i =1;
+        String[] arr = {"STT","Mã hóa đơn","Mã sản phẩm","Tên sản phẩm","Số lượng","Thành Tiền"};
         DefaultTableModel model = new DefaultTableModel(arr, 0 );
         try {
             while(rs.next())    {
                 Vector vec = new Vector();
+                vec.add(i++);
                 vec.add(rs.getString(1));
                 vec.add(rs.getString(2));
                 vec.add(rs.getString(3));
@@ -179,15 +185,16 @@ public class QuanLyCTHDB extends javax.swing.JPanel {
         }
     }
     private void jButtonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemActionPerformed
-        CFConnection conn = new CFConnection();
-        DAOCTHDB cthd = new DAOCTHDB(conn);
+        
         ResultSet rs = cthd.thongke(jFormattedTextFieldStart.getText(), jFormattedTextFieldEnd.getText());
         jTableQuanLySanPham.removeAll();
-        String[] arr = {"Mã hóa đơn","Mã sản phẩm","Tên sản phẩm","Số lượng","Thành Tiền"};
+        String[] arr = {"STT","Mã hóa đơn","Mã sản phẩm","Tên sản phẩm","Số lượng","Thành Tiền"};
+        int i = 1;
         DefaultTableModel model = new DefaultTableModel(arr, 0 );
         try {
             while(rs.next())   {
                 Vector vec = new Vector();
+                vec.add(i++);
                 vec.add(rs.getString(1));
                 vec.add(rs.getString(2));
                 vec.add(rs.getString(3));
@@ -203,7 +210,6 @@ public class QuanLyCTHDB extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonSua;
     private javax.swing.JButton jButtonThem;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnd;
     private javax.swing.JFormattedTextField jFormattedTextFieldStart;

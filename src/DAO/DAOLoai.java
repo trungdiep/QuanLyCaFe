@@ -30,7 +30,11 @@ public class DAOLoai {
     
     public int addLoai(Loai l){
         int n = 0;
+
+        //String sql = "insert into tbl_Loai( TenLoai) values ('"+l.getTenloai()+"')";
+
         String sql = "insert into tbl_Loai(TenLoai) values ('"+ l.getTenloai() +"')";
+
         try {
             Statement statement =  conn.createStatement();
             n = statement.executeUpdate(sql);
@@ -104,6 +108,6 @@ public class DAOLoai {
     public static void main(String[] args) {
         CFConnection conn = new CFConnection();
         DAOLoai dl = new DAOLoai(conn);
-        System.out.println(dl.removeLoai("L02"));
+        System.out.println(dl.addLoai(new Loai("Loai 1")));
     }
 }

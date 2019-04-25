@@ -207,8 +207,8 @@ public class DAOSanPham {
     public static void main(String[] args) throws SQLException {
         CFConnection conn = new CFConnection();
         DAOSanPham daosp = new DAOSanPham(conn);
-        //SanPham sp = new SanPham("SP01","computrino","L01",570000.0);
-        //System.out.println(daosp.insertSanPham(sp));
-        System.out.println(daosp.displayMaSP("computrino"));
+        SanPham sp = new SanPham("computrino","L001",570000.0);
+        System.out.println(daosp.insertSanPham(sp));
+        //System.out.println(daosp.displayMaSP("computrino"));
     }
 }

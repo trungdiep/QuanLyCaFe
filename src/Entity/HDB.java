@@ -12,11 +12,26 @@ package Entity;
 public class HDB {
     private String mahdb;
     private String manv;
+    private String date;
     private String makh;
     private Double tongtien;
 
     public HDB(String mahdb, String manv, String makh, Double tongtien) {
         this.mahdb = mahdb;
+        this.manv = manv;
+        this.makh = makh;
+        this.tongtien = tongtien;
+    }
+
+    public HDB(String mahdb, String manv, String date, String makh, Double tongtien) {
+        this.mahdb = mahdb;
+        this.manv = manv;
+        this.date = date;
+        this.makh = makh;
+        this.tongtien = tongtien;
+    }
+
+    public HDB(String manv, String makh, Double tongtien) {
         this.manv = manv;
         this.makh = makh;
         this.tongtien = tongtien;
@@ -64,6 +79,13 @@ public class HDB {
     public void setTongtien(Double tongtien) {
         this.tongtien = tongtien;
     }
-    
+
+    @Override
+    public String toString() {
+        return "HDB{" + "mahdb=" + mahdb + ", manv=" + manv + ", date=" + date + ", makh=" + makh + ", tongtien=" + tongtien + '}';
+    }
+
+
+   
     
 }

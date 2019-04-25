@@ -95,6 +95,17 @@ public class DAOUser {
         }     
         return role;
     }
+    public ResultSet displayAll()   {
+       ResultSet rs = null;
+       String sql = "select * from tbl_User ";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
     public String getMaNhanVien(String user) {
         ResultSet rs = null;
         String sql = "select MaNhanVien from tbl_User where User = '" + user +"'";

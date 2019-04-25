@@ -9,6 +9,7 @@ import Connection.CFConnection;
 import Entity.HDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -33,15 +34,15 @@ public class DAOHDB {
         
         
         
-        String sql = "insert into tbl_HoaDonBan (MaHoaDonBan,MaNhanVien,MaKhachHang,TongTien) values(?,?,?,?)";
+        String sql = "insert into tbl_HoaDonBan (MaNhanVien,MaKhachHang,TongTien) values(?,?,?)";
         PreparedStatement pre;
         
         try {
             pre = conn.prepareStatement(sql);
-            pre.setString(1,hd.getMahdb());
-            pre.setString(2,hd.getManv());
-            pre.setString(3,hd.getMakh());
-            pre.setDouble(4,hd.getTongtien());
+
+            pre.setString(1,hd.getManv());
+            pre.setString(2,hd.getMakh());
+            pre.setDouble(3,hd.getTongtien());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAOHDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,12 +79,38 @@ public class DAOHDB {
         }
         return n;
     }
-    public static void main(String[] args) {
+    public ResultSet displayAll()   {
+        ResultSet rs =null;
+        String sql = "select * from tbl_HoaDonBan";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOHDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rs;
+    }
+    public ResultSet displaytheodate(String start,String end)    {
+        ResultSet rs =null;
+        String sql = "select MaHoaDonBan,NgayBan,MaNhanVien,MaKhachHang,TongTien from tbl_HoaDonBan where NgayBan between '"+start+"' and '"+end+"'";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOHDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    public static void main(String[] args) throws SQLException {
         CFConnection conn = new CFConnection();
         DAOHDB dhd = new DAOHDB(conn);
-        DAOHDB ct = new DAOHDB(conn);
-            HDB hd = new HDB("HD04","NV00","KH01",57000.0);
-        System.out.println(ct.addHDB(hd));
+        ResultSet rs = dhd.displayAll();
+        while(rs.next())    {
+            HDB hd = new HDB(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4), Double.valueOf(rs.getString(5)));
+            System.out.println(hd.toString());
+        }
+                 
     }
         
     
