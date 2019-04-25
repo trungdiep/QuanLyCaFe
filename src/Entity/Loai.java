@@ -15,7 +15,11 @@ public class Loai {
 
     public Loai() {
     }
-    
+
+    public Loai(String tenloai) {
+        this.tenloai = tenloai;
+    }
+
     public Loai(String maloai, String tenloai) {
         this.maloai = maloai;
         this.tenloai = tenloai;

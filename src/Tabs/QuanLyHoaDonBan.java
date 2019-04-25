@@ -27,11 +27,9 @@ public class QuanLyHoaDonBan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextFieldMaHoaDon = new javax.swing.JTextField();
         jTextFieldMaKhachHang = new javax.swing.JTextField();
         jButtonSua = new javax.swing.JButton();
         jButtonTimKiem = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jTextFieldTongTien = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -50,9 +48,6 @@ public class QuanLyHoaDonBan extends javax.swing.JPanel {
 
         jButtonTimKiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonTimKiem.setText("Tìm kiếm");
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Mã hóa đơn: ");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Ngày bán: ");
@@ -111,14 +106,12 @@ public class QuanLyHoaDonBan extends javax.swing.JPanel {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldNgayBan, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                            .addComponent(jTextFieldMaHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                             .addComponent(jTextFieldMaKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                             .addComponent(jTextFieldTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                             .addComponent(jTextFieldMaNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
@@ -154,11 +147,7 @@ public class QuanLyHoaDonBan extends javax.swing.JPanel {
                         .addGap(11, 11, 11)
                         .addComponent(jButtonTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextFieldNgayBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,7 +175,6 @@ public class QuanLyHoaDonBan extends javax.swing.JPanel {
     private javax.swing.JButton jButtonThem;
     private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JButton jButtonXoa;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -194,7 +182,6 @@ public class QuanLyHoaDonBan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableQuanLySanPham;
-    private javax.swing.JTextField jTextFieldMaHoaDon;
     private javax.swing.JTextField jTextFieldMaKhachHang;
     private javax.swing.JTextField jTextFieldMaNhanVien;
     private javax.swing.JTextField jTextFieldNgayBan;

@@ -55,7 +55,7 @@ public class CFConnection {
         return rs;
     }
     public CFConnection() {
-        this("jdbc:sqlserver://localhost:1433;databaseName=QuanLyQuanCaFe","sa","123456");
+        this("jdbc:sqlserver://localhost:1433;databaseName=QuanLyQuanCafe","sa","123456");
     }
 
     public static void main(String[] args) throws SQLException {

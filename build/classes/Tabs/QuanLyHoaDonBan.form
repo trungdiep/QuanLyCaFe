@@ -22,7 +22,6 @@
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -30,7 +29,6 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jTextFieldNgayBan" alignment="0" pref="349" max="32767" attributes="0"/>
-                          <Component id="jTextFieldMaHoaDon" alignment="0" pref="349" max="32767" attributes="0"/>
                           <Component id="jTextFieldMaKhachHang" alignment="0" pref="349" max="32767" attributes="0"/>
                           <Component id="jTextFieldTongTien" alignment="0" pref="349" max="32767" attributes="0"/>
                           <Component id="jTextFieldMaNhanVien" alignment="0" pref="349" max="32767" attributes="0"/>
@@ -77,12 +75,7 @@
                       <Component id="jButtonTimKiem" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldMaHoaDon" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldNgayBan" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -112,8 +105,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="jTextFieldMaHoaDon">
-    </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldMaKhachHang">
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSua">
@@ -130,14 +121,6 @@
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="M&#xe3; h&#xf3;a &#x111;&#x1a1;n: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTongTien">

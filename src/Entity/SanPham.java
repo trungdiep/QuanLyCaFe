@@ -15,14 +15,25 @@ public class SanPham {
     private String maloai;
     private Double giaban;
 
+    public SanPham() {
+    }
+
+    public SanPham(String tensp) {
+        this.tensp = tensp;
+    }
+
+    public SanPham(String tensp, String maloai, Double giaban) {
+        this.tensp = tensp;
+        this.maloai = maloai;
+        this.giaban = giaban;
+    }
+    
     public SanPham(String masp, String tensp, String maloai, Double giaban) {
         this.masp = masp;
         this.tensp = tensp;
         this.maloai = maloai;
         this.giaban = giaban;
     }
-    
-    
     
     public void setMasp(String masp) throws Exception {
         this.masp = masp;
@@ -41,7 +52,6 @@ public class SanPham {
             throw new Exception("ko de ma loai trong");
         }
     }
-
 
     public void setGiaban(Double giaban) {
         this.giaban = giaban;

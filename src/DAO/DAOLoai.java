@@ -30,7 +30,7 @@ public class DAOLoai {
     
     public int addLoai(Loai l){
         int n = 0;
-        String sql = "insert into tbl_Loai(MaLoai, TenLoai) values ('"+ l.getMaloai() +"','"+ l.getTenloai() +"')";
+        String sql = "insert into tbl_Loai(TenLoai) values ('"+ l.getTenloai() +"')";
         try {
             Statement statement =  conn.createStatement();
             n = statement.executeUpdate(sql);

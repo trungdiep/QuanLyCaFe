@@ -32,7 +32,7 @@ public class QuanLyLoai extends javax.swing.JPanel {
     }
     
     private void showTable() {
-        System.out.println("start gets");
+        //System.out.println("start gets");
         ArrayList<Loai> list = dAOLoai.displayAll();
         
         DefaultTableModel tabbleLoai = (DefaultTableModel) jTableQuanLyLoaiSanPham.getModel();
@@ -197,7 +197,7 @@ public class QuanLyLoai extends javax.swing.JPanel {
 
     private void jButtonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemActionPerformed
         // TODO add your handling code here:
-        Loai loai = new Loai(jTextFieldMaLoai.getText(), jTextFieldTenLoai.getText());
+        Loai loai = new Loai(jTextFieldTenLoai.getText());
         if(dAOLoai.addLoai(loai) == 1)
             JOptionPane.showMessageDialog(jButtonSua, " Thêm thành công! ");
         else
@@ -215,6 +215,8 @@ public class QuanLyLoai extends javax.swing.JPanel {
             JOptionPane.showConfirmDialog(jButtonSua, " Sửa không thành công! ");
         
         showTable();
+        jTextFieldMaLoai.setText("");
+        jTextFieldTenLoai.setText("");
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXoaActionPerformed
@@ -225,6 +227,8 @@ public class QuanLyLoai extends javax.swing.JPanel {
             JOptionPane.showConfirmDialog(jButtonSua, " Xoa không thành công! ");
         
         showTable();
+        jTextFieldMaLoai.setText("");
+        jTextFieldTenLoai.setText("");
     }//GEN-LAST:event_jButtonXoaActionPerformed
 
     private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
@@ -238,6 +242,8 @@ public class QuanLyLoai extends javax.swing.JPanel {
                 loai.getMaloai(), loai.getTenloai()
             });
         }
+        jTextFieldMaLoai.setText("");
+        jTextFieldTenLoai.setText("");
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
 
