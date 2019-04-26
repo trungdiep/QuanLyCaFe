@@ -31,7 +31,7 @@ public class DBConnection {
     }
 
     public DBConnection() throws SQLException {
-        this("jdbc:sqlserver://localhost:1433;databaseName=QuanLyQuanCafe", "sa", "123456");
+        this("jdbc:sqlserver://localhost:1433;databaseName=QLQuanCafe", "sa", "123456");
     }
     
     public static void main(String[] args) throws SQLException {

@@ -232,10 +232,11 @@ public class QuanLySanPham extends javax.swing.JPanel {
         
         if(dAOSanPham.insertSanPham(sanPham) == 1){
             JOptionPane.showMessageDialog(jButtonSua, " Thêm thành công! ");
+            showTable();
         }else{
             JOptionPane.showMessageDialog(jButtonSua, " Thêm không thành công! ");
         }
-        showTable();
+
         //xoa trang textbox sau khi da thuc hien xong.
         jTextFieldTenSanPham.setText("");
         jTextFieldGiaBan.setText("");
@@ -255,12 +256,11 @@ public class QuanLySanPham extends javax.swing.JPanel {
         SanPham sanPham = new SanPham(jTextFieldTenSanPham.getText(), maLoai, giaBan);
         if(dAOSanPham.updateSanPham(sanPham) == 1){
             JOptionPane.showMessageDialog(jButtonSua, " Sửa thành công! ");
+            showTable();
         }else{
             JOptionPane.showMessageDialog(jButtonSua, " Sửa không thành công! ");
         }
-        
-        showTable();
-        
+                
         jTextFieldTenSanPham.setText("");
         jTextFieldGiaBan.setText("");
     }//GEN-LAST:event_jButtonSuaActionPerformed
@@ -275,11 +275,11 @@ public class QuanLySanPham extends javax.swing.JPanel {
         
         if(dAOSanPham.removeSanPham(jTextFieldTenSanPham.getText()) == 1){
             JOptionPane.showMessageDialog(jButtonSua, " Xóa thành công! ");
+            showTable();
         }else{
             JOptionPane.showMessageDialog(jButtonSua, " Xóa không thành công! ");
         }
         
-        showTable();
         jTextFieldTenSanPham.setText("");
     }//GEN-LAST:event_jButtonXoaActionPerformed
 

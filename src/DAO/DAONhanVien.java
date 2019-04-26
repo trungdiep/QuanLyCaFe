@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -20,71 +21,101 @@ import java.util.logging.Logger;
 public class DAONhanVien {
     CFConnection cfconn;
     Connection conn;
+    
     public DAONhanVien(CFConnection cfconn)   {
         this.cfconn = cfconn;
         this.conn=cfconn.getConn();
     }
-    public int addNhanVien(NhanVien nv) {
-        int n =0;
-        PreparedStatement pre = null;
-        String sql = "insert into tbl_NhanVien values (?,?,?,?,?,?,?)";
+    public int insertNhanVien(NhanVien nv) {
+        int n = 0;
+        String sql = "insert into tbl_NhanVien(TenNhanVien,DiaChi,GioiTinh,NgaySinh,Que,SDT) values(?,?,?,?,?,?)";
+
         try {
-           pre = conn.prepareStatement(sql);
-           pre.setString(1,nv.getManv());
-           pre.setString(2,nv.getTennv());
-           pre.setString(3,nv.getNoio());
-           pre.setString(4,nv.getGioitinh());
-           pre.setString(5,nv.getNgaysinh());
-           pre.setString(6,nv.getque());
-           pre.setString(7,nv.getSdt());
-           n = pre.executeUpdate();
-        }
-        catch(SQLException ex)  {
-            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE,null,ex);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, nv.getTennv());
+            preparedStatement.setString(2, nv.getNoio());
+            preparedStatement.setString(3, nv.getGioitinh());
+            preparedStatement.setString(4, nv.getNgaysinh());
+            preparedStatement.setString(5, nv.getque());
+            preparedStatement.setString(6, nv.getSdt());
+            
+            n = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return n;
     }
-    public int RemoveNhanVien(String manv)  {
+    public int RemoveNhanVien(String tenNhanVien)  {
         int n = 0;
-        String sql = "delete from tbl_NhanVien Where manv = '"+manv+"'";
+        String sql = "delete from tbl_NhanVien Where TenNhanVien = '"+ tenNhanVien +"'";
         try {
             Statement state = conn.createStatement();
             n = state.executeUpdate(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(DAONhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }       
         return n;
     }
-    public int  UpdateNhanVien(NhanVien nv)  {
+    public int updateNhanVien(NhanVien nv) {
         int n = 0;
-        String sql = "Insert into tbl_NhanVien Where set tennv = '"+nv.getTennv()+"',diachi = '"
-                +nv.getNoio()+"',gioitinh = '"+nv.getGioitinh()+",ngaysinh = '"+nv.getNgaysinh()+"', que = '"+nv.getque()
-                +"', sdt = '"+nv.getSdt()+"'";
-        Statement state;
+        String sql = "update tbl_NhanVien set DiaChi=?, GioiTinh=?, NgaySinh=?, Que=?, SDT=? Where TenNhanVien= ?";
         try {
-            state = conn.createStatement();
-            n = state.executeUpdate(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, nv.getNoio());
+            preparedStatement.setString(2, nv.getGioitinh());
+            preparedStatement.setString(3, nv.getNgaysinh());
+            preparedStatement.setString(4, nv.getque());
+            preparedStatement.setString(5, nv.getSdt());
+            preparedStatement.setString(6, nv.getTennv());
+            
+            n = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(DAONhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+            ex.printStackTrace();
+        }
         return n;
     }
-    private ResultSet displayAll()  {
-        ResultSet rs = null;
+    public ArrayList <NhanVien> displayAll(){
+        ArrayList <NhanVien> nhanVien = new ArrayList<>();
         String sql = "select * from tbl_NhanVien";
         try {
-            Statement stm = conn.createStatement();
-            rs = stm.executeQuery(sql);
-            
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {                
+                String maNhanVien = resultSet.getString("MaNhanVien");
+                String tenNhanVien = resultSet.getString("TenNhanVien");
+                String diaChi = resultSet.getString("DiaChi");
+                String gioiTinh = resultSet.getString("GioiTinh");
+                String ngaySinh = resultSet.getString("NgaySinh");
+                String que = resultSet.getString("Que");
+                String sDT = resultSet.getString("SDT");
+                nhanVien.add(new NhanVien(maNhanVien, tenNhanVien, diaChi, gioiTinh, ngaySinh, que, sDT));
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(DAONhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        return rs;
+        return nhanVien;
     }
-    public static void main(String[] args) {
-        CFConnection conn = new CFConnection();
-        DAONhanVien nv = new DAONhanVien(conn);
-        NhanVien nv1 = new NhanVien("NV01","truong","tu niem","nam","1998-05-19","thai binh","09999999");
-        System.out.println(nv.addNhanVien(nv1));
+    
+    public ArrayList <NhanVien> searchNhanVien(String ten){
+        ArrayList <NhanVien> nhanVien = new ArrayList<>();
+        String sql ="select * from tbl_NhanVien where TenNhanVien like '%"+ ten +"%'";
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {                
+                String maNhanVien = resultSet.getString("MaNhanVien");
+                String tenNhanVien = resultSet.getString("TenNhanVien");
+                String diaChi = resultSet.getString("DiaChi");
+                String gioiTinh = resultSet.getString("GioiTinh");
+                String ngaySinh = resultSet.getString("NgaySinh");
+                String que = resultSet.getString("Que");
+                String sDT = resultSet.getString("SDT");
+                nhanVien.add(new NhanVien(maNhanVien, tenNhanVien, diaChi, gioiTinh, ngaySinh, que, sDT));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nhanVien;
     }
 }
